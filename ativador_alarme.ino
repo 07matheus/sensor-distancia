@@ -1,13 +1,14 @@
 // PINAGENS DO ARDUÍNO
-int pinoBotao     = 2;
-int pinoLED       = 3;
-int pinoTriger    = 4;
-int pinoEcho      = 5;
-int pinoLEDAlarme = 6;
+int pinoBotao  = 2;
+int pinoLED    = 3;
+int pinoTriger = 4;
+int pinoEcho   = 5;
+int pinoBuzzer = 6;
 
 // VARIÁVEIS AUXILIARES
-int ativarAlarme = 0;
-float distancia  = 0;
+int ativarAlarme            = 0;
+float distancia             = 0;
+float distanciaAtivarAlarme = 0.4;
 
 void setup() {
   // ENTRADA DE DADOS
@@ -32,10 +33,10 @@ void alarmeAtivo() {
 
   distancia = ((pulseIn(pinoEcho, HIGH) * 0.000340) / 2);
 
-  if(distancia < 0.4) {
-    tone(pinoLEDAlarme, 1500);
+  if(distancia < distanciaAtivarAlarme) {
+    tone(pinoBuzzer, 1500);
     delay(100);
-    noTone(pinoLEDAlarme);
+    noTone(pinoBuzzer);
   }
 }
 
